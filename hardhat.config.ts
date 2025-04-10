@@ -88,6 +88,30 @@ const config: HardhatUserConfig = {
       verify: getVerifyConfig("fantom"),
       accounts,
     },
+    optimism: {
+      eid: EndpointId.OPTIMISM_V2_MAINNET,
+      url: getRpcURL("optimism"),
+      verify: getVerifyConfig("optimism"),
+      accounts,
+    },
+    base: {
+      eid: EndpointId.BASE_V2_MAINNET,
+      url: getRpcURL("base"),
+      verify: getVerifyConfig("base"),
+      accounts,
+    },
+    arbitrum: {
+      eid: EndpointId.ARBITRUM_V2_MAINNET,
+      url: getRpcURL("arbitrum"),
+      verify: getVerifyConfig("arbitrum"),
+      accounts,
+    },
+    sonic: {
+      eid: EndpointId.SONIC_V2_MAINNET,
+      url: getRpcURL("sonic"),
+      verify: getVerifyConfig("sonic"),
+      accounts,
+    },
   },
   namedAccounts: {
     deployer: {
