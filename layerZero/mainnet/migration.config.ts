@@ -54,7 +54,7 @@ const config: OAppOmniGraphHardhat = {
         receiveLibraryConfig: { receiveLibrary: "0xc02Ab410f0734EFa3F14628780e6e695156024C2", gracePeriod: 0n },
         receiveConfig: {
           ulnConfig: {
-            confirmations: BigInt(15),
+            confirmations: BigInt(25),
             requiredDVNs: ["0x589dedbd617e0cbcb916a9223f4d1300c294236b", "0xa59ba433ac34d2927232918ef5b2eaafcf130ba5"],
             optionalDVNs: ["0xc9ca319f6da263910fd9b037ec3d817a814ef3d8", "0xd56e4eab23cb81f43168f9f45211eb027b9ac7cc"],
             optionalDVNThreshold: 1,
@@ -87,7 +87,7 @@ const config: OAppOmniGraphHardhat = {
         receiveLibraryConfig: { receiveLibrary: "0xc02Ab410f0734EFa3F14628780e6e695156024C2", gracePeriod: 0n },
         receiveConfig: {
           ulnConfig: {
-            confirmations: BigInt(15),
+            confirmations: BigInt(512),
             requiredDVNs: ["0x589dedbd617e0cbcb916a9223f4d1300c294236b", "0xa59ba433ac34d2927232918ef5b2eaafcf130ba5"],
             optionalDVNs: ["0xc9ca319f6da263910fd9b037ec3d817a814ef3d8", "0xd56e4eab23cb81f43168f9f45211eb027b9ac7cc"],
             optionalDVNThreshold: 1,
