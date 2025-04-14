@@ -116,7 +116,14 @@ export interface PeripheralMigrationContractInterface extends Interface {
   encodeFunctionData(functionFragment: "mainEid", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "migrateToPRL",
-    values: [AddressLike, BigNumberish, BigNumberish, BytesLike, BytesLike]
+    values: [
+      AddressLike,
+      BigNumberish,
+      BigNumberish,
+      AddressLike,
+      BytesLike,
+      BytesLike
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "oAppVersion",
@@ -394,6 +401,7 @@ export interface PeripheralMigrationContract extends BaseContract {
       _receiver: AddressLike,
       _amount: BigNumberish,
       _dstEid: BigNumberish,
+      _refundAddress: AddressLike,
       _extraSendOptions: BytesLike,
       _extraReturnOptions: BytesLike
     ],
@@ -502,6 +510,7 @@ export interface PeripheralMigrationContract extends BaseContract {
       _receiver: AddressLike,
       _amount: BigNumberish,
       _dstEid: BigNumberish,
+      _refundAddress: AddressLike,
       _extraSendOptions: BytesLike,
       _extraReturnOptions: BytesLike
     ],

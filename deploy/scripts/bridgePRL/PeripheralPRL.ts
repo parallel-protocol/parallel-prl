@@ -24,7 +24,6 @@ const deploy: DeployFunction = async (hre) => {
     args: [endpointV2Deployment.address, deployer],
     log: true,
     skipIfAlreadyDeployed: false,
-    ...GAS,
   });
 
   console.log(`Deployed contract: ${contractName}, network: ${hre.network.name}, address: ${contract.address}`);

@@ -95,6 +95,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "approvalRequired",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "oftVersion",
     outputs: [
       {

@@ -166,6 +166,7 @@ export interface PeripheralPRLInterface extends Interface {
       | "SEND_AND_CALL"
       | "allowInitializePath"
       | "allowance"
+      | "approvalRequired"
       | "approve"
       | "balanceOf"
       | "combineOptions"
@@ -195,7 +196,6 @@ export interface PeripheralPRLInterface extends Interface {
       | "quoteSend"
       | "renounceOwnership"
       | "send"
-      | "sendWithPermit"
       | "setDelegate"
       | "setEnforcedOptions"
       | "setMsgInspector"
@@ -242,6 +242,10 @@ export interface PeripheralPRLInterface extends Interface {
   encodeFunctionData(
     functionFragment: "allowance",
     values: [AddressLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approvalRequired",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -338,18 +342,6 @@ export interface PeripheralPRLInterface extends Interface {
     values: [SendParamStruct, MessagingFeeStruct, AddressLike]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendWithPermit",
-    values: [
-      SendParamStruct,
-      MessagingFeeStruct,
-      AddressLike,
-      BigNumberish,
-      BigNumberish,
-      BytesLike,
-      BytesLike
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setDelegate",
     values: [AddressLike]
   ): string;
@@ -403,6 +395,10 @@ export interface PeripheralPRLInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "approvalRequired",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
@@ -459,10 +455,6 @@ export interface PeripheralPRLInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "send", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "sendWithPermit",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "setDelegate",
     data: BytesLike
@@ -746,6 +738,8 @@ export interface PeripheralPRL extends BaseContract {
     "view"
   >;
 
+  approvalRequired: TypedContractMethod<[], [boolean], "view">;
+
   approve: TypedContractMethod<
     [spender: AddressLike, value: BigNumberish],
     [boolean],
@@ -917,25 +911,6 @@ export interface PeripheralPRL extends BaseContract {
     "payable"
   >;
 
-  sendWithPermit: TypedContractMethod<
-    [
-      _sendParam: SendParamStruct,
-      _fee: MessagingFeeStruct,
-      _refundAddress: AddressLike,
-      _deadline: BigNumberish,
-      _v: BigNumberish,
-      _r: BytesLike,
-      _s: BytesLike
-    ],
-    [
-      [MessagingReceiptStructOutput, OFTReceiptStructOutput] & {
-        msgReceipt: MessagingReceiptStructOutput;
-        oftReceipt: OFTReceiptStructOutput;
-      }
-    ],
-    "payable"
-  >;
-
   setDelegate: TypedContractMethod<
     [_delegate: AddressLike],
     [void],
@@ -1015,6 +990,9 @@ export interface PeripheralPRL extends BaseContract {
     [bigint],
     "view"
   >;
+  getFunction(
+    nameOrSignature: "approvalRequired"
+  ): TypedContractMethod<[], [boolean], "view">;
   getFunction(
     nameOrSignature: "approve"
   ): TypedContractMethod<
@@ -1202,26 +1180,6 @@ export interface PeripheralPRL extends BaseContract {
       _sendParam: SendParamStruct,
       _fee: MessagingFeeStruct,
       _refundAddress: AddressLike
-    ],
-    [
-      [MessagingReceiptStructOutput, OFTReceiptStructOutput] & {
-        msgReceipt: MessagingReceiptStructOutput;
-        oftReceipt: OFTReceiptStructOutput;
-      }
-    ],
-    "payable"
-  >;
-  getFunction(
-    nameOrSignature: "sendWithPermit"
-  ): TypedContractMethod<
-    [
-      _sendParam: SendParamStruct,
-      _fee: MessagingFeeStruct,
-      _refundAddress: AddressLike,
-      _deadline: BigNumberish,
-      _v: BigNumberish,
-      _r: BytesLike,
-      _s: BytesLike
     ],
     [
       [MessagingReceiptStructOutput, OFTReceiptStructOutput] & {

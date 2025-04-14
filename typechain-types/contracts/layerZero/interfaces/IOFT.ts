@@ -105,11 +105,21 @@ export type MessagingReceiptStructOutput = [
 
 export interface IOFTInterface extends Interface {
   getFunction(
-    nameOrSignature: "oftVersion" | "quoteOFT" | "quoteSend" | "send" | "token"
+    nameOrSignature:
+      | "approvalRequired"
+      | "oftVersion"
+      | "quoteOFT"
+      | "quoteSend"
+      | "send"
+      | "token"
   ): FunctionFragment;
 
   getEvent(nameOrSignatureOrTopic: "OFTReceived" | "OFTSent"): EventFragment;
 
+  encodeFunctionData(
+    functionFragment: "approvalRequired",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "oftVersion",
     values?: undefined
@@ -128,6 +138,10 @@ export interface IOFTInterface extends Interface {
   ): string;
   encodeFunctionData(functionFragment: "token", values?: undefined): string;
 
+  decodeFunctionResult(
+    functionFragment: "approvalRequired",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "oftVersion", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "quoteOFT", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "quoteSend", data: BytesLike): Result;
@@ -231,6 +245,8 @@ export interface IOFT extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  approvalRequired: TypedContractMethod<[], [boolean], "view">;
+
   oftVersion: TypedContractMethod<
     [],
     [[string, bigint] & { interfaceId: string; version: bigint }],
@@ -271,6 +287,9 @@ export interface IOFT extends BaseContract {
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "approvalRequired"
+  ): TypedContractMethod<[], [boolean], "view">;
   getFunction(
     nameOrSignature: "oftVersion"
   ): TypedContractMethod<
