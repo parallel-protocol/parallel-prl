@@ -61,6 +61,43 @@ export const getVerifyConfig = (network: string): VerifyConfig => {
         },
       };
     }
+    case "optimism": {
+      if (!process.env.OPTIMISM_ETHERSCAN_API_KEY) throw new Error("OPTIMISM_ETHERSCAN_API_KEY is not set");
+      return {
+        etherscan: {
+          apiUrl: "https://api-optimistic.etherscan.io",
+          apiKey: process.env.OPTIMISM_ETHERSCAN_API_KEY,
+        },
+      };
+    }
+    case "base": {
+      if (!process.env.BASE_ETHERSCAN_API_KEY) throw new Error("BASE_ETHERSCAN_API_KEY is not set");
+      return {
+        etherscan: {
+          apiUrl: "https://api.basescan.org",
+          apiKey: process.env.BASE_ETHERSCAN_API_KEY,
+        },
+      };
+    }
+    case "arbitrum": {
+      if (!process.env.ARBITRUM_ETHERSCAN_API_KEY) throw new Error("ARBITRUM_ETHERSCAN_API_KEY is not set");
+      return {
+        etherscan: {
+          apiUrl: "https://api.arbiscan.io",
+          apiKey: process.env.ARBITRUM_ETHERSCAN_API_KEY,
+        },
+      };
+    }
+    case "sonic": {
+      if (!process.env.SONIC_ETHERSCAN_API_KEY) throw new Error("SONIC_ETHERSCAN_API_KEY is not set");
+      return {
+        etherscan: {
+          apiUrl: "https://api.sonicscan.org",
+          apiKey: process.env.SONIC_ETHERSCAN_API_KEY,
+        },
+      };
+    }
+
     default: {
       throw new Error(`${network} Network Verify not configured`);
     }

@@ -164,6 +164,7 @@ export interface LockBoxInterface extends Interface {
       | "SEND"
       | "SEND_AND_CALL"
       | "allowInitializePath"
+      | "approvalRequired"
       | "combineOptions"
       | "endpoint"
       | "enforcedOptions"
@@ -218,6 +219,10 @@ export interface LockBoxInterface extends Interface {
   encodeFunctionData(
     functionFragment: "allowInitializePath",
     values: [OriginStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approvalRequired",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "combineOptions",
@@ -332,6 +337,10 @@ export interface LockBoxInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "allowInitializePath",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "approvalRequired",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -603,6 +612,8 @@ export interface LockBox extends BaseContract {
     "view"
   >;
 
+  approvalRequired: TypedContractMethod<[], [boolean], "view">;
+
   combineOptions: TypedContractMethod<
     [_eid: BigNumberish, _msgType: BigNumberish, _extraOptions: BytesLike],
     [string],
@@ -802,6 +813,9 @@ export interface LockBox extends BaseContract {
   getFunction(
     nameOrSignature: "allowInitializePath"
   ): TypedContractMethod<[origin: OriginStruct], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "approvalRequired"
+  ): TypedContractMethod<[], [boolean], "view">;
   getFunction(
     nameOrSignature: "combineOptions"
   ): TypedContractMethod<

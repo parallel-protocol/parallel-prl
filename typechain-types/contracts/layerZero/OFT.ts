@@ -165,6 +165,7 @@ export interface OFTInterface extends Interface {
       | "SEND_AND_CALL"
       | "allowInitializePath"
       | "allowance"
+      | "approvalRequired"
       | "approve"
       | "balanceOf"
       | "combineOptions"
@@ -227,6 +228,10 @@ export interface OFTInterface extends Interface {
   encodeFunctionData(
     functionFragment: "allowance",
     values: [AddressLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approvalRequired",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -352,6 +357,10 @@ export interface OFTInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "approvalRequired",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
@@ -646,6 +655,8 @@ export interface OFT extends BaseContract {
     "view"
   >;
 
+  approvalRequired: TypedContractMethod<[], [boolean], "view">;
+
   approve: TypedContractMethod<
     [spender: AddressLike, value: BigNumberish],
     [boolean],
@@ -855,6 +866,9 @@ export interface OFT extends BaseContract {
     [bigint],
     "view"
   >;
+  getFunction(
+    nameOrSignature: "approvalRequired"
+  ): TypedContractMethod<[], [boolean], "view">;
   getFunction(
     nameOrSignature: "approve"
   ): TypedContractMethod<

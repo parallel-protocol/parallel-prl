@@ -166,7 +166,7 @@ export interface PrincipalMigrationContractInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "migrateToPRLAndBridge",
-    values: [SendParamStruct, MessagingFeeStruct]
+    values: [SendParamStruct, AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "nextNonce",
@@ -540,7 +540,7 @@ export interface PrincipalMigrationContract extends BaseContract {
   >;
 
   migrateToPRLAndBridge: TypedContractMethod<
-    [_sendParam: SendParamStruct, _fee: MessagingFeeStruct],
+    [_sendParam: SendParamStruct, _refundAddress: AddressLike],
     [void],
     "payable"
   >;
@@ -677,7 +677,7 @@ export interface PrincipalMigrationContract extends BaseContract {
   getFunction(
     nameOrSignature: "migrateToPRLAndBridge"
   ): TypedContractMethod<
-    [_sendParam: SendParamStruct, _fee: MessagingFeeStruct],
+    [_sendParam: SendParamStruct, _refundAddress: AddressLike],
     [void],
     "payable"
   >;

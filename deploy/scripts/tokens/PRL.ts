@@ -2,11 +2,10 @@ import assert from "assert";
 import { parseEther } from "ethers/lib/utils";
 import { type DeployFunction } from "hardhat-deploy/types";
 
-import { GAS } from "../../utils";
-
 const contractName = "PRL";
 const supplyToMint = parseEther("1000000000");
 const deploy: DeployFunction = async (hre) => {
+  console.log("hre");
   const { getNamedAccounts, deployments } = hre;
 
   const { deploy } = deployments;
@@ -21,7 +20,6 @@ const deploy: DeployFunction = async (hre) => {
     from: deployer,
     args: [supplyToMint],
     log: true,
-    ...GAS,
   });
 
   console.log(`Deployed contract: ${contractName}, network: ${hre.network.name}, address: ${contract.address}`);

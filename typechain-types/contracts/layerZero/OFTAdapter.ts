@@ -164,6 +164,7 @@ export interface OFTAdapterInterface extends Interface {
       | "SEND"
       | "SEND_AND_CALL"
       | "allowInitializePath"
+      | "approvalRequired"
       | "combineOptions"
       | "endpoint"
       | "enforcedOptions"
@@ -212,6 +213,10 @@ export interface OFTAdapterInterface extends Interface {
   encodeFunctionData(
     functionFragment: "allowInitializePath",
     values: [OriginStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approvalRequired",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "combineOptions",
@@ -311,6 +316,10 @@ export interface OFTAdapterInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "allowInitializePath",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "approvalRequired",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -551,6 +560,8 @@ export interface OFTAdapter extends BaseContract {
     "view"
   >;
 
+  approvalRequired: TypedContractMethod<[], [boolean], "view">;
+
   combineOptions: TypedContractMethod<
     [_eid: BigNumberish, _msgType: BigNumberish, _extraOptions: BytesLike],
     [string],
@@ -725,6 +736,9 @@ export interface OFTAdapter extends BaseContract {
   getFunction(
     nameOrSignature: "allowInitializePath"
   ): TypedContractMethod<[origin: OriginStruct], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "approvalRequired"
+  ): TypedContractMethod<[], [boolean], "view">;
   getFunction(
     nameOrSignature: "combineOptions"
   ): TypedContractMethod<

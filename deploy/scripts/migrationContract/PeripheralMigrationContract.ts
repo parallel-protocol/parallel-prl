@@ -27,7 +27,6 @@ const deploy: DeployFunction = async (hre) => {
     args: [config.mimo, endpointV2Deployment.address, deployer, config.mainChainEid],
     log: true,
     skipIfAlreadyDeployed: false,
-    ...GAS,
   });
 
   console.log(`Deployed contract: ${contractName}, network: ${hre.network.name}, address: ${contract.address}`);

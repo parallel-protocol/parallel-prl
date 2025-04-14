@@ -2,10 +2,6 @@ import assert from "assert";
 
 import { type DeployFunction } from "hardhat-deploy/types";
 
-import { GAS } from "../../utils";
-import { readFileSync } from "fs";
-import { ConfigData } from "../../utils/types";
-
 const contractName = "LockBox";
 
 const deploy: DeployFunction = async (hre) => {
@@ -27,7 +23,6 @@ const deploy: DeployFunction = async (hre) => {
     args: [prl.address, endpointV2Deployment.address, deployer],
     log: true,
     skipIfAlreadyDeployed: false,
-    ...GAS,
   });
 
   console.log(`Deployed contract: ${contractName}, network: ${hre.network.name}, address: ${contract.address}`);
